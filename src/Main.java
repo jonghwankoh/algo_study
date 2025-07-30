@@ -8,8 +8,13 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
-		List<Integer> arrayList = new ArrayList<>();
-		arrayList.add(1);                                                                                                                                                                                                                                                                                                                                                                                                                               
+		int N = Integer.parseInt(br.readLine());
+		
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				
+			}
+		}
 	}
 
 }
