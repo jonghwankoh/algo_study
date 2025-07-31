@@ -8,13 +8,40 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
-		int N = Integer.parseInt(br.readLine());
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int N = Integer.parseInt(st.nextToken());
+		int M = Integer.parseInt(st.nextToken());
+		ArrayList<int[]> sharkList = new ArrayList<>();
+		ArrayList<int[]> spaceList = new ArrayList<>();
 		
 		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < N; j++) {
-				
+			st = new StringTokenizer(br.readLine());
+			for (int j = 0; j < M; j++) {
+				if(st.nextToken().equals("1")) {
+					sharkList.add(new int[] {i, j});
+				} else {
+					spaceList.add(new int[] {i, j});
+				}
 			}
 		}
+		
+		int ans = 0;
+		for (int[] space : spaceList) {
+			int minLength = 50;
+			for (int[] shark : sharkList) {
+				minLength = Math.min(
+						minLength, 
+						Math.max(
+								Math.abs(space[0] - shark[0]),
+								Math.abs(space[1] - shark[1])
+						)
+				);
+			}
+			ans = Math.max(ans, minLength);
+		}
+		System.out.println(ans);
+		
+		
 	}
 
 }
