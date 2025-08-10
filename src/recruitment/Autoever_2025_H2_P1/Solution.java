@@ -1,8 +1,8 @@
-package recruitment;
+package recruitment.Autoever_2025_H2_P1;
 
 import java.util.*;
 
-public class Autoever_2025_H2_P1 {
+public class Solution {
 	static class Pair implements Comparable<Pair> {
 		int start, end;
 
