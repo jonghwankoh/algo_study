@@ -86,11 +86,11 @@ public class Autoever_2025_H2_P1 {
 			}
 			if (!flag) continue; // 경로 완성 실패
 
-            for (int dst = 1; dst <= n; dst++) {
+			for (int dst = 1; dst <= n; dst++) {
 				flag = true;
 				int prev = src;
-                for (int k = 0; k < record.length; k++) {
-                    boolean isShortestPath = record[k] > 0; // 부호에 따른 최단거리 여부 (+: 최단거리, -: 비최단거리)
+				for (int k = 0; k < record.length; k++) {
+					boolean isShortestPath = record[k] > 0; // 부호에 따른 최단거리 여부 (+: 최단거리, -: 비최단거리)
 					int next = path[k];
 					// 부호에 따라 조건 처리
 					if (isShortestPath) {
@@ -108,12 +108,12 @@ public class Autoever_2025_H2_P1 {
 					}
 
 					prev = next;
-                }
+				}
 				if (flag) {
 					ansList.add(new Pair(src, dst));
 				}
-            }
-        }
+			}
+		}
 
 		Collections.sort(ansList);
 		int[][] result = new int[ansList.size()][2];
