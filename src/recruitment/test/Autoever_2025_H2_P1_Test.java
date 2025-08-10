@@ -8,6 +8,7 @@ public class Autoever_2025_H2_P1_Test {
 		testBasicCase();
 		testAllShortestPaths();
 		testNonShortestPath();
+		testComplexMixedConditions();
 		
 		summary();
 	}
@@ -43,5 +44,28 @@ public class Autoever_2025_H2_P1_Test {
 		
 		int[][] result = solution(n, roads, record);
 		assertArrayEquals("Non-Shortest Path", expected, result);
+	}
+	static void testComplexMixedConditions() {
+		int n = 8;
+		int[][] roads = {
+			{1, 2, 10, 1},
+			{2, 3, 5, 2},
+			{3, 4, 3, 3},
+			{1, 5, 20, 3},
+			{5, 6, 1, 2},
+			{6, 4, 2, 1},
+			{2, 7, 7, 3},
+			{7, 8, 8, 1},
+			{8, 4, 1, 5},
+			{1, 4, 30, 2},
+			{2, 4, 15, 4},
+			{3, 5, 12, 1},
+			{6, 7, 4, 4}
+		};
+		int[] record = {-2, -1, 3};
+		int[][] expected = {{2, 1}, {3, 5}, {6, 4}, {6, 6}, {6, 7}, {6, 8}};
+		
+		int[][] result = solution(n, roads, record);
+		assertArrayEquals("Complex Mixed Conditions", expected, result);
 	}
 }
