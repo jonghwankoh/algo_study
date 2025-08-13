@@ -1,56 +1,77 @@
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 class Solution
 {
+    private static int N;
+    private static int[] cardList;
+    private static int[] opsCnt;
+    private static int maxAns;
+    private static int minAns;
+
     public static void main(String args[]) throws Exception
     {
-        // System.setIn(new FileInputStream("res/input.txt"));
+        System.setIn(new FileInputStream("res/input.txt"));
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int T = 10;
+        int T = Integer.parseInt(br.readLine());
 
         StringBuilder sb = new StringBuilder();
-        int[][] input = new int[100][100];
-        int dst = 0;
         for(int test_case = 1; test_case <= T; test_case++)
         {
-            br.readLine(); // ignore first line
-            ArrayList<Integer> ladderList = new ArrayList<>();
-            for (int i = 0; i < 100; i++) {
-                StringTokenizer st = new StringTokenizer(br.readLine());
-                for (int j = 0; j < 100; j++) {
-                    input[i][j] = Integer.parseInt(st.nextToken());
-                }
-            }
-            for (int i = 0; i < 100; i++) {
-                if (input[0][i] == 1) {
-                    ladderList.add(i);
-                    if (input[99][i] == 2) {
-                        dst = i;
-                    }
-                }
+            N = Integer.parseInt(br.readLine());
+            opsCnt = new int[4];
+            cardList = new int[N];
+            StringTokenizer st = new StringTokenizer(br.readLine());
+
+            for (int i = 0; i < 4; i++) {
+                opsCnt[i] = Integer.parseInt(st.nextToken());
             }
 
-            for (int i = 0; i < ladderList.size(); i++) {
-                int cur = i;
-                for (int j = 1; j < 99; j++) {
-                    int curPos = ladderList.get(cur);
-                    if (cur > 0 && input[j][curPos - 1] == 1) {
-                        cur--;
-                    } else if (cur < ladderList.size() - 1 && input[j][curPos + 1] == 1) {
-                        cur++;
-                    }
-                }
-                if (ladderList.get(cur) == dst) {
-                    sb.append("#" + test_case + " " + ladderList.get(i) + "\n");
-                    break;
-                }
+            st = new StringTokenizer(br.readLine());
+            for (int i = 0; i < N; i++) {
+                cardList[i] = Integer.parseInt(st.nextToken());
             }
+
+            maxAns = Integer.MIN_VALUE;
+            minAns = Integer.MAX_VALUE;
+            solution(0, cardList[0]);
+            sb.append("#" + test_case + " " + (maxAns - minAns) + "\n");
         }
         System.out.println(sb);
+
+
+    }
+
+    private static void solution(int size, int result) {
+        if (size == N - 1) {
+            maxAns = Math.max(maxAns, result);
+            minAns = Math.min(minAns, result);
+            return;
+        }
+        for (int i = 0; i < 4; i++) {
+            if (opsCnt[i] > 0) {
+                opsCnt[i]--;
+                int next = result;
+                switch (i) {
+                    case 0:
+                        next += cardList[size + 1];
+                        break;
+                    case 1:
+                        next -= cardList[size + 1];
+                        break;
+                    case 2:
+                        next *= cardList[size + 1];
+                        break;
+                    case 3:
+                        next /= cardList[size + 1];
+                        break;
+                }
+                solution(size + 1, next);
+                opsCnt[i]++;
+            }
+        }
     }
 }
