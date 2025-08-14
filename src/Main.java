@@ -8,6 +8,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+<<<<<<< HEAD
+import java.util.Arrays;
+=======
+>>>>>>> f1ef2467fb38ffc559857edd626babd8c9a0366b
 import java.util.Queue;
 import java.util.StringTokenizer;
 
@@ -19,6 +23,11 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
+<<<<<<< HEAD
+		
+	}
+}
+=======
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		int n = Integer.parseInt(st.nextToken());
 		int m = Integer.parseInt(st.nextToken());
@@ -75,3 +84,4 @@ public class Main {
 		return cnt;
 	}
 }
+>>>>>>> f1ef2467fb38ffc559857edd626babd8c9a0366b
