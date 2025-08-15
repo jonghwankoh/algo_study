@@ -1,10 +1,9 @@
 package swea;
 
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
-class SWEA_Dx_0000_Template {
-
+class SWEA_D4_1249_보급로 {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -13,10 +12,14 @@ class SWEA_Dx_0000_Template {
         StringBuilder sb = new StringBuilder();
         for (int test_case = 1; test_case <= T; test_case++) {
             int N = Integer.parseInt(br.readLine());
-            
-            // TODO
+            int[] arr = new int[N];
+            StringTokenizer st = new StringTokenizer(br.readLine());
 
-            sb.append("#").append(test_case).append(' ').append("?").append('\n');
+            for (int i = 0; i < N; i++) {
+                arr[i] = Integer.parseInt(st.nextToken());
+            }
+
+            sb.append(String.format("#%d %d\n", test_case, ans));
         }
         System.out.println(sb);
     }
