@@ -4,11 +4,26 @@ import java.util.*;
 import java.io.*;
 
 class SWEA_D3_1873_상호의_배틀필드 {
-    static int H, W;
-    static char[][] gameMap;
     static int[] dy = {-1, 1, 0, 0};
     static int[] dx = {0, 0, -1, 1};
+    static Map<Character, Integer> dirMap = new HashMap<>();
+    static {
+        dirMap.put('^', 0);
+        dirMap.put('v', 1);
+        dirMap.put('<',2);
+        dirMap.put('>', 3);
+
+        dirMap.put('U', 0);
+        dirMap.put('D', 1);
+        dirMap.put('L', 2);
+        dirMap.put('R',3);
+    }
+
     static char[] dirMark = {'^', 'v', '<', '>'};
+
+    static int H, W;
+    static char[][] gameMap;
+
     static int curDir, curY, curX;
 
     public static void main(String[] args) throws Exception {
@@ -31,21 +46,12 @@ class SWEA_D3_1873_상호의_배틀필드 {
                     char c = input.charAt(j);
                     gameMap[i][j] = c;
 
-                    boolean isTank = true;
-                    if (c == '^') {
-                        curDir = 0;
-                    } else if (c == 'v') {
-                        curDir = 1;
-                    } else if (c == '<') {
-                        curDir = 2;
-                    } else if (c == '>') {
-                        curDir = 3;
-                    } else {
-                        isTank = false;
-                    }
-                    if (isTank) {
+                    // if is tank
+                    if (dirMap.containsKey(c)) {
                         curY = i;
                         curX = j;
+                        curDir = dirMap.get(c);
+                        gameMap[i][j] = '.';
                     }
                 }
             }
@@ -56,29 +62,17 @@ class SWEA_D3_1873_상호의_배틀필드 {
             // main
             for (int i = 0; i < N; i++) {
                 char c = cmd.charAt(i);
-                switch (c) {
-                    case 'U':
-                        move(0);
-                        break;
-                    case 'D':
-                        move(1);
-                        break;
-                    case 'L':
-                        move(2);
-                        break;
-                    case 'R':
-                        move(3);
-                        break;
-                    case 'S':
-                        shoot();
-                        break;
+                if (dirMap.containsKey(c)) {
+                    move(dirMap.get(c));
+                } else {
+                    shoot();
                 }
             }
 
-            sb.append("#").append(test_case).append(' ');
+            sb.append("#" + test_case + ' ');
             for (int i = 0; i < H; i++) {
                 for (int j = 0; j < W; j++) {
-                    sb.append(gameMap[i][j]);
+                    sb.append(i == curY && j == curX ? dirMark[curDir] : gameMap[i][j]);
                 }
                 sb.append('\n');
             }
@@ -88,14 +82,12 @@ class SWEA_D3_1873_상호의_배틀필드 {
     
     static void move(int type) {
         curDir = type;
-        int ny = curY + dy[type];
-        int nx = curX + dx[type];
+        int ny = curY + dy[curDir];
+        int nx = curX + dx[curDir];
         if (ny >= 0 && ny < H && nx >= 0 && nx < W && gameMap[ny][nx] == '.') {
-            gameMap[curY][curX] = '.';
             curY = ny;
             curX = nx;
         }
-        gameMap[curY][curX] = dirMark[type];
     }
 
     static void shoot() {
