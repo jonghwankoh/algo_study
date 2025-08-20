@@ -11,6 +11,8 @@ class Solution
     private final static int CMD_ERASE      = 300;
     private final static int CMD_WATCH      = 400;
     private final static int CMD_SUGGEST    = 500;
+
+    private static long[] commandTimes = new long[600]; // Array to store cumulative times for each command type
     
     public final static class RESULT
     {
@@ -38,6 +40,7 @@ class Solution
 
         for (int q = 0; q < Q; ++q)
         {
+            long startTime = System.nanoTime(); // Start timing
             int cmd;
             cmd = sc.nextInt();
 
@@ -115,6 +118,9 @@ class Solution
                 okay = false;
                 break;
             }
+
+            long endTime = System.nanoTime(); // End timing
+            commandTimes[cmd] += (endTime - startTime); // Accumulate time for the command
         }
 
         return okay;
@@ -129,11 +135,30 @@ class Solution
         int TC = sc.nextInt();
         int MARK = sc.nextInt();
         
+        long startTime = System.nanoTime();
+
         for (int testcase = 1; testcase <= TC; ++testcase)
         {
             int score = run(sc) ? MARK : 0;
             System.out.println("#" + testcase + " " + score);
         }
+
+        long endTime = System.nanoTime();
+
+        System.out.println("Total time: " + (endTime - startTime) / 10e6 + "ms");
+
+        // Find the command with the highest cumulative time
+        int maxCmd = -1;
+        long maxTime = 0;
+        for (int i = 100; i <= 500; i += 100) {
+            System.out.println("cmd: " + i + " (" + commandTimes[i] / 10e6 + " ms)");
+            if (commandTimes[i] > maxTime) {
+                maxTime = commandTimes[i];
+                maxCmd = i;
+            }
+        }
+
+        System.out.println("Command with the highest cumulative time: " + maxCmd + " (" + maxTime / 10e6 + " ns)");
 
         sc.close();
     }
