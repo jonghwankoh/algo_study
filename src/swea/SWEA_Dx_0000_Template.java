@@ -16,7 +16,7 @@ class SWEA_Dx_0000_Template {
             
             // TODO
 
-            sb.append("#").append(test_case).append(' ').append("?").append('\n');
+            sb.append("#" + test_case + ' ' + "???" + '\n');
         }
         System.out.println(sb);
     }
