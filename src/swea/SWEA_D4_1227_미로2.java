@@ -11,12 +11,12 @@ class SWEA_Dx_0000_Template {
         int T = Integer.parseInt(br.readLine());
 
         StringBuilder sb = new StringBuilder();
-        for (int tc = 1; tc <= T; tc++) {
+        for (int test_case = 1; test_case <= T; test_case++) {
             int N = Integer.parseInt(br.readLine());
             
             // TODO
 
-            sb.append("#" + tc + ' ' + "???" + '\n');
+            sb.append("#" + test_case + ' ' + "???" + '\n');
         }
         System.out.println(sb);
     }
