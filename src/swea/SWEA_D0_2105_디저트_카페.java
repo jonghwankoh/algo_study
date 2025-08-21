@@ -3,6 +3,8 @@ package swea;
 import java.io.*;
 import java.util.*;
 
+// 비효율적인 코드지만 제출합니다
+
 class SWEA_D0_2105_디저트_카페 {
     static int N;
     static int[][] grid;
