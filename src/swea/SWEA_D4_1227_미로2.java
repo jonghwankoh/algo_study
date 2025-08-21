@@ -7,7 +7,7 @@ class SWEA_D4_1227_미로2 {
     static int[] dx = {1, -1, 0, 0};
     static int[] dy = {0, 0, -1, 1};
     public static void main(String[] args) throws Exception {
-        System.setIn(new FileInputStream("res/input.txt"));
+        // System.setIn(new FileInputStream("res/input.txt"));
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         int T = 10;
